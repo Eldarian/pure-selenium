@@ -14,6 +14,9 @@ import org.testng.annotations.Test;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 public class BasicTest {
 
     private static final Logger LOGGER = Logger.getLogger(BasicTest.class);
@@ -26,7 +29,7 @@ public class BasicTest {
 
     @BeforeMethod
     public void initDriver() {
-        driver = new RemoteWebDriver(DesiredCapabilities.firefox());
+        driver = new RemoteWebDriver(DesiredCapabilities.chrome());
     }
 
     @Test
@@ -43,7 +46,7 @@ public class BasicTest {
         driver.get("https://demoqa.com/");
         DemoQAHomePage homePage = new DemoQAHomePage(driver);
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window,scroll(0, 100);");
+        js.executeScript("window.scroll(0, 100);");
         homePage.clickElementsCard();
         Assert.assertEquals(homePage.getPageHeader(), "Elements");
     }
@@ -54,10 +57,27 @@ public class BasicTest {
         DemoQAHomePage homePage = new DemoQAHomePage(driver);
         homePage.clickElementsCardViaJS();
         Assert.assertEquals(homePage.getPageHeader(), "Elements");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/elements");
     }
+
+    @Test
+    public void testTabsFunctionality() {
+        driver.get("https://demoqa.com");
+        DemoQAHomePage homePage = new DemoQAHomePage(driver);
+        homePage.openNewTab();
+        homePage.openNewTab();
+        homePage.openNewTab();
+
+        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(handles.get(1));
+        driver.get("https://demoqa.com/elements");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/elements");
+
+    }
+
 
     @AfterMethod
     public void closeDriver() {
-        driver.close();
+        driver.quit();
     }
 }
