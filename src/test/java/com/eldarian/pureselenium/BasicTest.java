@@ -1,5 +1,6 @@
 package com.eldarian.pureselenium;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,8 @@ public class BasicTest {
     public void testElementsCardClickable() {
         driver.get("https://demoqa.com/");
         DemoQAHomePage homePage = new DemoQAHomePage(driver);
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
+        //homePage.removeAds();
         homePage.clickElementsCard();
         Assert.assertEquals(homePage.getPageHeader(), "Elements");
     }
@@ -72,9 +74,27 @@ public class BasicTest {
         driver.switchTo().window(handles.get(1));
         driver.get("https://demoqa.com/elements");
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/elements");
-
     }
 
+    @Test
+    public void refreshTest() {
+        driver.get("https://demoqa.com");
+        DemoQAHomePage homePage = new DemoQAHomePage(driver);
+        homePage.refresh();
+        homePage.refresh();
+        homePage.removeAds();
+        homePage.clickElementsCard();
+        homePage.getPageHeader();
+    }
+
+
+    @Test
+    public void waitTest() {
+        driver.get("https://demoqa.com/alerts");
+        AlertsPage alertsPage = new AlertsPage(driver);
+        Alert alert = alertsPage.clickTimedAlert();
+        Assert.assertEquals(alert.getText(), "This alert appeared after 5 seconds");
+    }
 
     @AfterMethod
     public void closeDriver() {

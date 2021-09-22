@@ -12,6 +12,9 @@ public class DemoQAHomePage {
     @FindBy(xpath = "//div[@class='card-body']/h5[text()='Elements']/../../..")
     private WebElement elementsCard;
 
+    @FindBy(id = "adplus-anchor")
+    private WebElement ad;
+
     public void clickElementsCard() {
         elementsCard.click();
     }
@@ -30,11 +33,18 @@ public class DemoQAHomePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         WebDriverWait wait = new WebDriverWait(driver, 20);
-        //elementsCard = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='card-body']/h5[text()='Elements']/../../..")));
-
     }
 
     public void openNewTab() {
         ((JavascriptExecutor) driver).executeScript("window.open();");
+    }
+
+    public void removeAds() {
+        ((JavascriptExecutor)driver).executeScript("arguments[0].remove()", ad);
+
+    }
+
+    public void refresh() {
+        driver.navigate().refresh();
     }
 }
