@@ -1,7 +1,9 @@
 package com.eldarian.pureselenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.Logs;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -33,7 +35,25 @@ public class BasicTest {
         DemoQAHomePage homePage = new DemoQAHomePage(driver);
         driver.manage().window().maximize();
         homePage.clickElementsCard();
-        Assert.assertEquals(driver.findElement(By.className("main-header")).getText(), "Elements");
+        Assert.assertEquals(homePage.getPageHeader(), "Elements");
+    }
+
+    @Test
+    public void testElementsCardClickableViaJsScroll() {
+        driver.get("https://demoqa.com/");
+        DemoQAHomePage homePage = new DemoQAHomePage(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window,scroll(0, 100);");
+        homePage.clickElementsCard();
+        Assert.assertEquals(homePage.getPageHeader(), "Elements");
+    }
+
+    @Test
+    public void testElementsCardClickableViaJsClick() {
+        driver.get("https://demoqa.com/");
+        DemoQAHomePage homePage = new DemoQAHomePage(driver);
+        homePage.clickElementsCardViaJS();
+        Assert.assertEquals(homePage.getPageHeader(), "Elements");
     }
 
     @AfterMethod

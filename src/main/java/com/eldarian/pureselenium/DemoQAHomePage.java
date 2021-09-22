@@ -1,6 +1,7 @@
 package com.eldarian.pureselenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,16 @@ public class DemoQAHomePage {
 
     public void clickElementsCard() {
         elementsCard.click();
+    }
+
+    public void clickElementsCardViaJS() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", elementsCard);
+
+    }
+
+    public String getPageHeader() {
+        return driver.findElement(By.className("main-header")).getText();
     }
 
     public DemoQAHomePage(WebDriver driver) {
