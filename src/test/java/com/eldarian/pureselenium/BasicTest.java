@@ -1,5 +1,7 @@
 package com.eldarian.pureselenium;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,12 +22,13 @@ import java.util.Set;
 
 public class BasicTest {
 
-    private static final Logger LOGGER = Logger.getLogger(BasicTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(BasicTest.class);
     WebDriver driver;
 
     @BeforeClass
     public void configureLogger() {
         //PropertyConfigurator.configure("src/main/resources/log4j.properties");
+        BasicConfigurator.configure();
     }
 
     @BeforeMethod
@@ -37,8 +40,7 @@ public class BasicTest {
     public void testElementsCardClickable() {
         driver.get("https://demoqa.com/");
         DemoQAHomePage homePage = new DemoQAHomePage(driver);
-        //driver.manage().window().maximize();
-        //homePage.removeAds();
+        homePage.removeAds();
         homePage.clickElementsCard();
         Assert.assertEquals(homePage.getPageHeader(), "Elements");
     }
@@ -69,7 +71,8 @@ public class BasicTest {
         homePage.openNewTab();
         homePage.openNewTab();
         homePage.openNewTab();
-
+        LOGGER.warn("TOO MANY TABS!");
+        LOGGER.warn("AGAIN");
         ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(handles.get(1));
         driver.get("https://demoqa.com/elements");
