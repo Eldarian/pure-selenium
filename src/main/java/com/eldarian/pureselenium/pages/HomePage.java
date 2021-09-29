@@ -1,12 +1,11 @@
-package com.eldarian.pureselenium;
+package com.eldarian.pureselenium.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DemoQAHomePage {
+public class HomePage {
     private WebDriver driver;
 
     @FindBy(xpath = "//div[@class='card-body']/h5[text()='Elements']/../../..")
@@ -29,7 +28,7 @@ public class DemoQAHomePage {
         return driver.findElement(By.className("main-header")).getText();
     }
 
-    public DemoQAHomePage(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         WebDriverWait wait = new WebDriverWait(driver, 20);

@@ -1,4 +1,4 @@
-package com.eldarian.pureselenium;
+package com.eldarian.pureselenium.pages;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
