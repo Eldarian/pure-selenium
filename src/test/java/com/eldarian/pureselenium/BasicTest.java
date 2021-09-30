@@ -1,17 +1,17 @@
 package com.eldarian.pureselenium;
 
 import com.eldarian.pureselenium.pages.HomePage;
-import org.apache.log4j.LogManager;
 import org.openqa.selenium.JavascriptExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class BasicTest extends AbstractTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(BasicTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasicTest.class);
 
     @Test
     public void testElementsCardClickable() {

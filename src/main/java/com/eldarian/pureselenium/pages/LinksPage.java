@@ -1,13 +1,11 @@
 package com.eldarian.pureselenium.pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-public class LinksPage {
+public class LinksPage extends AbstractPage {
     WebDriver driver;
 
     public LinksPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 }

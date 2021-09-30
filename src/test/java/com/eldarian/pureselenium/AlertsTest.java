@@ -1,13 +1,11 @@
 package com.eldarian.pureselenium;
 
 import com.eldarian.pureselenium.pages.AlertsPage;
-import org.apache.log4j.BasicConfigurator;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AlertsTest extends AbstractTest{
+public class AlertsTest extends AbstractTest {
 
     @Test
     public void waitTest() {

@@ -1,11 +1,13 @@
 package com.eldarian.pureselenium.pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends AbstractPage {
     private WebDriver driver;
 
     @FindBy(xpath = "//div[@class='card-body']/h5[text()='Elements']/../../..")
@@ -29,8 +31,7 @@ public class HomePage {
     }
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
         WebDriverWait wait = new WebDriverWait(driver, 20);
     }
 
@@ -39,7 +40,7 @@ public class HomePage {
     }
 
     public void removeAds() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].remove()", ad);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].remove()", ad);
 
     }
 
