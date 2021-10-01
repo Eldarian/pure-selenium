@@ -1,6 +1,7 @@
 package com.eldarian.pureselenium;
 
 import com.eldarian.pureselenium.pages.HomePage;
+import com.eldarian.pureselenium.pages.SelectPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,5 +66,15 @@ public class BasicTest extends AbstractTest {
         homePage.removeAds();
         homePage.clickElementsCard();
         homePage.getPageHeader();
+    }
+
+    @Test
+    public void testSelector() {
+        getDriver().get("https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+        pause(2);
+        SelectPage selectPage = new SelectPage(getDriver());
+        selectPage.closePopup();
+        selectPage.select(5);
+        Assert.assertEquals(selectPage.getSelectedDay(), "Friday");
     }
 }
