@@ -6,7 +6,9 @@ import java.util.Properties;
 
 public enum Configs {
     BASE_URL("base_url"),
-    BROWSER("browser");
+    BROWSER("browser"),
+    VERSION("version"),
+    PLATFORM("platform");
 
     private final String value;
 

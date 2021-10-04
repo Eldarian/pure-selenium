@@ -2,6 +2,7 @@ package com.eldarian.pureselenium;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -15,12 +16,16 @@ public class DriverPool {
 
     public static WebDriver getDriver() {
         String threadName = Thread.currentThread().getName();
-        LOGGER.info(threadName);
+        LOGGER.debug(threadName);
         WebDriver driver = drivers.get(threadName);
-        LOGGER.info(threadName + " " + driver);
+        LOGGER.debug(threadName + " " + driver);
         if (driver == null) {
             capabilities.setBrowserName(Configs.BROWSER.getValue());
-            driver = new RemoteWebDriver(capabilities);
+            //driver = new RemoteWebDriver(capabilities);
+            driver = new RemoteWebDriver(new DesiredCapabilities(
+                    Configs.BROWSER.getValue(),
+                    Configs.VERSION.getValue(),
+                    Platform.valueOf(Configs.PLATFORM.getValue())));
             drivers.put(threadName, driver);
         }
         return driver;

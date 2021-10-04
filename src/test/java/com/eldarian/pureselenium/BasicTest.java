@@ -71,10 +71,9 @@ public class BasicTest extends AbstractTest {
     @Test
     public void testSelector() {
         getDriver().get("https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
-        pause(2);
         SelectPage selectPage = new SelectPage(getDriver());
-        selectPage.closePopup();
-        selectPage.select(5);
+        selectPage.select(6);
+        selectPage = new SelectPage(getDriver());
         Assert.assertEquals(selectPage.getSelectedDay(), "Friday");
     }
 }

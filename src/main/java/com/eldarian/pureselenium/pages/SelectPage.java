@@ -11,9 +11,16 @@ public class SelectPage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(SelectPage.class);
 
     @FindBy(id = "select-demo")
+    private WebElement selectorElement;
+
+    @FindBy(xpath = "//select[@name='States']")
+    private WebElement multiSelectElement;
+
     private Select selector;
 
-    @FindBy(className = "selectedValue")
+    private Select multiSelect;
+
+    @FindBy(className = "selected-value")
     private WebElement selectedDay;
 
     @FindBy(xpath = "//a[@title='Close']")
@@ -29,7 +36,8 @@ public class SelectPage extends AbstractPage {
     }
 
     public void select(int option) {
-        LOGGER.info("selector is " + selector);
+        LOGGER.info("selector is " + selectorElement);
+        selector = new Select(selectorElement);
         selector.selectByIndex(option);
     }
 

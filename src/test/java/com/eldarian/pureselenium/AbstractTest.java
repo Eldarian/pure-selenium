@@ -3,7 +3,7 @@ package com.eldarian.pureselenium;
 import org.apache.log4j.BasicConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractTest {
     String url;
@@ -12,7 +12,7 @@ public abstract class AbstractTest {
         return DriverPool.getDriver();
     }
 
-    @BeforeClass
+    @BeforeSuite
     public void configureLogger() {
         BasicConfigurator.configure();
     }
