@@ -1,7 +1,9 @@
 package com.eldarian.pureselenium.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
@@ -26,6 +28,12 @@ public class SelectPage extends AbstractPage {
     @FindBy(xpath = "//a[@title='Close']")
     private WebElement closePopupButton;
 
+    @FindBy(id = "printMe")
+    private WebElement firstSelectedButton;
+
+    @FindBy(className = "getall-selected")
+    private WebElement selectedValue;
+
     public void closePopup() {
         closePopupButton.click();
     }
@@ -47,6 +55,24 @@ public class SelectPage extends AbstractPage {
 
     public String getSelectedDay() {
         return selectedDay.getText().substring(16);
+    }
+
+    public void selectMultiple(int... args) {
+        multiSelect = new Select(multiSelectElement);
+        Actions actions = new Actions(driver);
+        actions.keyDown(Keys.COMMAND);
+        if (multiSelect.isMultiple()) {
+            for (int i = 0; i < args.length; i++) {
+                multiSelect.selectByIndex(args[i]);
+            }
+        }
+        actions.keyUp(Keys.COMMAND);
+    }
+
+    public String getFirstSelected() {
+        firstSelectedButton.click();
+        multiSelect.getOptions().stream().filter(WebElement::isSelected).forEach(option -> LOGGER.info(option.getText()));
+        return selectedValue.getText();
     }
 
 }

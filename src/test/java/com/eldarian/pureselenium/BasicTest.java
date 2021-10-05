@@ -76,4 +76,12 @@ public class BasicTest extends AbstractTest {
         selectPage = new SelectPage(getDriver());
         Assert.assertEquals(selectPage.getSelectedDay(), "Friday");
     }
+
+    @Test
+    public void testMultiSelect() {
+        getDriver().get("https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+        SelectPage selectPage = new SelectPage(getDriver());
+        selectPage.selectMultiple(4, 1, 0);
+        Assert.assertEquals(selectPage.getFirstSelected(), "First selected option is : California");
+    }
 }
